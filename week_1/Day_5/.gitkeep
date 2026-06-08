@@ -1,0 +1,47 @@
+#Valid Palindrome
+class Solution {
+    public boolean isPalindrome(String s) {
+        s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        int l = 0, r = s.length() - 1;
+
+        while (l < r) {
+            if (s.charAt(l++) != s.charAt(r--))
+                return false;
+        }
+        return true;
+    }
+}
+
+#Reverse String
+class Solution {
+    public void reverseString(char[] s) {
+        int l = 0, r = s.length - 1;
+
+        while (l < r) {
+            char temp = s[l];
+            s[l] = s[r];
+            s[r] = temp;
+            l++;
+            r--;
+        }
+    }
+}
+
+#Longest Common Prefix
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String p = strs[0];
+
+        for (int i = 1; i < strs.length; i++) {
+            while (!strs[i].startsWith(p))
+                p = p.substring(0, p.length() - 1);
+        }
+
+        return p;
+    }
+}
+
+
+
+
+
