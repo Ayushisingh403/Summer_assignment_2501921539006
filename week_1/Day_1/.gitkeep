@@ -1,0 +1,41 @@
+# Two sum
+int[] nums = {2, 7, 11, 15};
+int target = 9;
+
+Solution s = new Solution();
+int[] ans = s.twoSum(nums, target);
+
+System.out.println(ans[0] + " " + ans[1]);
+
+
+
+
+# Remove duplicate from stored array
+int[] nums = {1, 1, 2, 2, 3};
+
+Solution s = new Solution();
+int k = s.removeDuplicates(nums);
+
+System.out.println("Unique elements: " + k);
+
+for (int i = 0; i < k; i++) {
+    System.out.print(nums[i] + " ");
+}
+
+
+
+
+#Best time to sell and buy stock
+class Solution {
+    public int maxProfit(int[] prices) {
+        int minPrice = prices[0];
+        int maxProfit = 0;
+
+        for (int price : prices) {
+            minPrice = Math.min(minPrice, price);
+            maxProfit = Math.max(maxProfit, price - minPrice);
+        }
+
+        return maxProfit;
+    }
+}
