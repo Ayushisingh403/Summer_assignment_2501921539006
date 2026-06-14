@@ -1,0 +1,65 @@
+# Reverse Words in a String ||| 
+class Solution {
+    public String reverseWords(String s) {
+        String[] words = s.trim().split("\\s+");
+        StringBuilder res = new StringBuilder();
+
+        for (int i = words.length - 1; i >= 0; i--) {
+            res.append(words[i]);
+            if (i > 0) res.append(" ");
+        }
+
+        return res.toString();
+    }
+}
+
+# Decode String 
+import java.util.*;
+
+class Solution {
+    public String decodeString(String s) {
+        Stack<Integer> num = new Stack<>();
+        Stack<String> str = new Stack<>();
+        String cur = "";
+        int k = 0;
+
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) k = k * 10 + c - '0';
+            else if (c == '[') { num.push(k); str.push(cur); k = 0; cur = ""; }
+            else if (c == ']') {
+                String t = str.pop();
+                int n = num.pop();
+                while (n-- > 0) t += cur;
+                cur = t;
+            } else cur += c;
+        }
+        return cur;
+    }
+}
+
+# Generate Parantheses 
+import java.util.*;
+
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        backtrack(res, "", 0, 0, n);
+        return res;
+    }
+
+    void backtrack(List<String> res, String s, int open, int close, int n) {
+        if (s.length() == 2 * n) {
+            res.add(s);
+            return;
+        }
+
+        if (open < n)
+            backtrack(res, s + "(", open + 1, close, n);
+
+        if (close < open)
+            backtrack(res, s + ")", open, close + 1, n);
+    }
+}
+
+
+
