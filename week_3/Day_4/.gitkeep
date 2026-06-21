@@ -1,0 +1,71 @@
+# Daily Temperatures
+import java.util.*;
+
+class Solution {
+    public int[] dailyTemperatures(int[] temp) {
+        int n = temp.length;
+        int[] ans = new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!st.isEmpty() && temp[i] > temp[st.peek()]) {
+                int idx = st.pop();
+                ans[idx] = i - idx;
+            }
+            st.push(i);
+        }
+        return ans;
+    }
+}
+
+#Evaluate Reverse Polish Notation
+import java.util.*;
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> st = new Stack<>();
+
+        for (String t : tokens) {
+            if (t.equals("+")) st.push(st.pop() + st.pop());
+            else if (t.equals("-")) {
+                int b = st.pop(), a = st.pop();
+                st.push(a - b);
+            }
+            else if (t.equals("*")) st.push(st.pop() * st.pop());
+            else if (t.equals("/")) {
+                int b = st.pop(), a = st.pop();
+                st.push(a / b);
+            }
+            else st.push(Integer.parseInt(t));
+        }
+        return st.pop();
+    }
+}
+
+#Largest Rectangle in Histogram 
+
+import java.util.*;
+
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        Stack<Integer> st = new Stack<>();
+        int max = 0;
+
+        for (int i = 0; i <= heights.length; i++) {
+            int h = (i == heights.length) ? 0 : heights[i];
+
+            while (!st.isEmpty() && h < heights[st.peek()]) {
+                int height = heights[st.pop()];
+                int width = st.isEmpty() ? i : i - st.peek() - 1;
+                max = Math.max(max, height * width);
+            }
+            st.push(i);
+        }
+        return max;
+    }
+}
+
+
+
+
+
