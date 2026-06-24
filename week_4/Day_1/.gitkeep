@@ -1,0 +1,42 @@
+# Maximum Depth of Binary Tree 
+If the node is null, depth = 0.
+
+Recursively find depth of left and right subtree.
+
+Return 1 + max(leftDepth, rightDepth)
+
+Time Complexity
+
+O(n)
+
+Space Complexity
+
+O(h) recursion stack
+
+# Invert Binary Tree 
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        invertTree(root.left);
+        invertTree(root.right);
+
+        return root;
+    }
+}
+
+# Same Tree 
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
+        if (p.val != q.val) return false;
+
+        return isSameTree(p.left, q.left) &&
+               isSameTree(p.right, q.right);
+    }
+}
